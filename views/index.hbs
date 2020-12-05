@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Авторизация</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    {{!-- <h1>Список пользователей</h1>
+    <p><a href="/create">Добавить пользователя</a></p>
+    <table>
+        <tr><th>Name</th><th>Age</th><th></th></tr>
+        {{#each users}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.age}}</td>
+                <td>
+                    <a href="/edit/{{this.id}}">Edit</a>|
+                    <form action="delete/{{this.id}}" method="POST" style="display:inline;">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+        {{/each}}
+    </table> --}}
+
+
+    <form action="/login" method="POST">
+        <input type="text" name="username" placeholder="Login" />
+        <input type="password" name="password" placeholder="Password" /> 
+        <input type="submit" value="Login" />
+    </form>
+</body>
+<html>
