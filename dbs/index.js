@@ -5,7 +5,8 @@ const PROD_URI = "mongodb://Turganbay:turboturbo92@ds033267.mlab.com:33267/test-
 function connect(url) {
   return MongoClient.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    retryWrites: false
   }).then(client => client.db())
 }
  
