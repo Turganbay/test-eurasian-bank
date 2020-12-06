@@ -3,20 +3,21 @@
 <head>
     <title>Мои файлы</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css"  href="./../styles.css" />
 </head>
 <body>
     <a href="/logout">Выйти</a>
-    <h1>Мои файлы {{ user.username }}</h1>
+    <h1>Добро пожаловать, {{ user.username }}!</h1>
     <table>
         <tr>
-            <th>Filename</th>
-            <th>Date</th>
-            <th>Image</th>
+            <th>Название файла</th>
+            <th>Дата загрузки</th>
+            <th>Изображение</th>
         </tr>
         {{#each images}}
             <tr>
                 <td>{{this.filename}}</td>
-                <td>{{this.createAt}}</td>
+                <td>{{this.createdAt}}</td>
                 <td>
                     <img src="/{{this.filename}}" style="max-width: 100px;" />
                 </td>
@@ -25,7 +26,7 @@
     </table>
     <form method="POST" enctype="multipart/form-data" action="/upload">
         <input type="file" name="file">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Загрузить">
     </form>
 </body>
 <html>

@@ -2,11 +2,7 @@ const storage = require('node-sessionstorage');
 const accessTokenSecret = 'youraccesstokensecret';
 const jwt = require('jsonwebtoken');
 const path = require("path");
-
-
 const multer = require('multer');
-//const upload = multer({dest: 'uploads/'});
-
 
 const multer_storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -30,11 +26,8 @@ const upload = multer({ storage: multer_storage, fileFilter: fileFilter });
 
 const authenticateJWT = (req, res, next) => {
     const token = storage.getItem('token');
-    console.log('token', token);
-    // const authHeader = req.headers.authorization;
 
     if (token) {
-        // const token = authHeader.split(' ')[1];
         jwt.verify(token, accessTokenSecret, (err, user) => {
             if (err) {
                 return res.sendStatus(403);
@@ -49,7 +42,6 @@ const authenticateJWT = (req, res, next) => {
 
 module.exports = function(app, dbs, urlencodedParser) {
 
-    
     app.get('/', (req, res) => {
         res.render("index.hbs",  {
             users: [{
@@ -60,20 +52,8 @@ module.exports = function(app, dbs, urlencodedParser) {
         });
     })
 
-
     app.get('/main', authenticateJWT, (req, res) => {
-        // console.log('current user', req.user);
-
         dbs.production.collection('images').find({ userId: req.user.id}).toArray((err, docs) => {
-
-            console.info('docs', docs);
-            // if (err) {
-            //   console.log(err)
-            //   //res.error(err)
-            // } else {
-            //   console.info('message page', res.json(docs));
-            //   //res.json(docs)
-            // }
             res.render("main.hbs",  {
                 user: req.user,
                 images: docs
@@ -95,16 +75,12 @@ module.exports = function(app, dbs, urlencodedParser) {
     });
 
     app.get('/logout', function(req, res, next) {
-        //req.logout();
         req.session = null;
         storage.setItem('token', null);
         res.redirect('/');
     });
 
-    app.post('/upload', authenticateJWT, upload.single('file'), (req, res) => {
-        console.log('req', req.user);
-        console.log('req', req);
-        
+    app.post('/upload', authenticateJWT, upload.single('file'), (req, res) => {    
         if (!req.file) {
           console.log("No file received");
           return res.send({
@@ -118,15 +94,11 @@ module.exports = function(app, dbs, urlencodedParser) {
                 createdAt: Date.now(),
             }
             dbs.production.collection('images').insertOne(img_data, (err, message) => {
-                console.log('err', err);
-                console.log('message', message);
+                console.log('file received');
+                res.redirect('/main');    
             });
-            console.log('file received');
-            res.redirect('/main');
-          return res.send({
-            success: true
-          })
         }
       });
+    
     return app;
 }

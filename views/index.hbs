@@ -3,31 +3,29 @@
 <head>
     <title>Авторизация</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css"  href="./../styles.css" />
 </head>
 <body>
-    {{!-- <h1>Список пользователей</h1>
-    <p><a href="/create">Добавить пользователя</a></p>
-    <table>
-        <tr><th>Name</th><th>Age</th><th></th></tr>
-        {{#each users}}
-            <tr>
-                <td>{{this.name}}</td>
-                <td>{{this.age}}</td>
-                <td>
-                    <a href="/edit/{{this.id}}">Edit</a>|
-                    <form action="delete/{{this.id}}" method="POST" style="display:inline;">
-                        <input type="submit" value="Delete" />
-                    </form>
-                </td>
-            </tr>
-        {{/each}}
-    </table> --}}
+    <div class="">
+        Можно использовать логин и пароль: <br />
+        1. Turbo: Turbo <br />
+        2. TEST: TEST <br />
+        <a href="https://github.com/Turganbay/test-eurasian-bank" target="_blank">Ссылка на github</a>
+    </div>
+    <div class="entry-content">
+        <div class="login">
+            <h1>Введите логин и пароль</h1>
+            <form name="autorize" action="/login" method="POST">
+                <p><input type="text" name="username" required="" placeholder="Логин"></p>
+                <p><input type="password" name="password" required="" placeholder="Пароль"></p>
+                <p class="remember_me">
+                    <label><input type="checkbox" name="remember_me">Запомнить меня</label>
+                </p>
+                <p class="submit"><input type="submit" name="commit" value="Войти"></p>
+            </form>
+        </div>
 
-
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Login" />
-        <input type="password" name="password" placeholder="Password" /> 
-        <input type="submit" value="Login" />
-    </form>
+        <div class="clearfix"></div>
+    </div>
 </body>
 <html>
