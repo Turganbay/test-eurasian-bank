@@ -7,8 +7,8 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 process.env.PWD = process.cwd()
 
 
-app.use(express.static(process.env.PWD + '/uploads'));
-app.use(express.static(__dirname ));
+// app.use(express.static(process.env.PWD + '/uploads'));
+app.use(express.static(process.env.PWD));
 
 app.set("view engine", "hbs");
 
